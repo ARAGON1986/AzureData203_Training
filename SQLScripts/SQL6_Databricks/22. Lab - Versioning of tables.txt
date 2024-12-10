@@ -1,0 +1,5 @@
+%sql
+DESCRIBE HISTORY activitylogdata
+
+%sql
+SELECT COUNT(*) FROM appdb.activitylogdata VERSION AS OF 2

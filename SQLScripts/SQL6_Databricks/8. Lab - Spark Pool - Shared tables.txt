@@ -1,0 +1,23 @@
+CREATE DATABASE sparkdb
+
+USE sparkdb;
+
+CREATE TABLE SparkPoolActivityLog
+(
+   Correlationid string,
+   Operationname string,
+   Status string,
+   Eventcategory string,
+   Level string,
+   Time string,
+   Subscription string,
+   Eventinitiatedby string,
+   Resourcetype string,
+   Resourcegroup string,
+   Resource string
+) USING Parquet
+
+
+%%pyspark
+df = spark.read.load("abfss://data@datalake7000.dfs.core.windows.net/parquet/ActivityLog01.parquet", format="parquet")
+df.write.mode("append").saveAsTable("sparkdb.SparkPoolActivityLog");
